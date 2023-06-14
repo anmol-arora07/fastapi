@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Upload Example</title>
+</head>
+<body>
+  <h2>File Upload Form</h2>
+  <input type="file" id="fileToUpload">
+  <button onclick="uploadFile()">Upload File</button>
+
+  <script>
+    function uploadFile() {
+      const fileInput = document.getElementById('fileToUpload');
+      const file = fileInput.files[0];
+
+      if (file) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        // Replace "upload.php" with the URL to your server-side script
+        fetch('upload.php', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the response from the server
+          console.log(data);
+        })
+        .catch(error => {
+          // Handle errors
+          console.error(error);
+        });
+      }
+    }
+  </script>
+</body>
+</html>
