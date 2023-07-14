@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Input Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #dd4444;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Implementation Service</h1>
+
+  <form id="myForm">
+
+    <div class="form-group">
+      <label for="input1">Input 1:</label>
+      <input type="text" id="input1" name="input1">
+    </div>
+
+    <div class="form-group">
+      <label for="input2">Input 2:</label>
+      <input type="text" id="input2" name="input2">
+    </div>
+
+    <div class="form-group">
+      <label for="input3">Input 3:</label>
+      <input type="text" id="input3" name="input3">
+    </div>
+
+    <div class="form-group">
+      <label for="input4">Input 4:</label>
+      <input type="text" id="input4" name="input4">
+    </div>
+
+    <div class="form-group">
+      <label for="input5">Input 5:</label>
+      <input type="text" id="input5" name="input5">
+    </div>
+
+    <div class="form-group">
+      <label for="dropdown1">Dropdown 1:</label>
+      <select id="dropdown1" name="dropdown1">
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="dropdown2">Dropdown 2:</label>
+      <select id="dropdown2" name="dropdown2">
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </select>
+    </div>
+
+ 
+
+    <button type="button" onclick="submitForm()">Submit</button>
+  </form>
+
+  <script>
+    function submitForm() {
+      // Get form values
+      var input1 = document.getElementById('input1').value;
+      var input2 = document.getElementById('input2').value;
+      var input3 = document.getElementById('input3').value;
+      var input4 = document.getElementById('input4').value;
+      var input5 = document.getElementById('input5').value;
+      var dropdown1 = document.getElementById('dropdown1').value;
+      var dropdown2 = document.getElementById('dropdown2').value;
+
+      // Create a map object to store the form data
+      var formData = new Map();
+      formData.set('input1', input1);
+      formData.set('input2', input2);
+      formData.set('input3', input3);
+      formData.set('input4', input4);
+      formData.set('input5', input5);
+      formData.set('dropdown1', dropdown1);
+      formData.set('dropdown2', dropdown2);
+
+      var formDataObject = Object.fromEntries(formData);
+
+      // Send the form data to the server
+      fetch('http://127.0.0.1:8000/form-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formDataObject)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Server response:', data);
+        // Handle the response from the server
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Handle any errors that occur during the request
+      });
+
+      // Reset the form
+      document.getElementById('myForm').reset();
+    }
+  </script>
+</body>
+</html>
