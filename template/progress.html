@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Log Viewer</title>
+  <style>
+    /* CSS styles here */
+  </style>
+</head>
+<body>
+  <h1>Log Viewer</h1>
+
+  <div id="logContainer"></div>
+
+  <script>
+    const logContainer = document.getElementById('logContainer');
+    const ws = new WebSocket('ws://localhost:8000/ws/logs');  // Replace with your WebSocket URL
+
+    ws.onmessage = (event) => {
+      const logMessage = event.data;
+      const logEntry = document.createElement('p');
+      logEntry.textContent = logMessage;
+      logContainer.appendChild(logEntry);
+    };
+
+    ws.onclose = (event) => {
+      // Handle WebSocket connection closed
+    };
+  </script>
+</body>
+</html>

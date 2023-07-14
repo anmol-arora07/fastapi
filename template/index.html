@@ -120,7 +120,7 @@
       fetch('http://127.0.0.1:8000/form-data', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'text/json'
         },
         body: JSON.stringify(formDataObject)
       })
@@ -128,15 +128,13 @@
       .then(data => {
         console.log('Server response:', data);
         // Handle the response from the server
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        // Handle any errors that occur during the request
-      });
+      
 
-      // Reset the form
-      document.getElementById('myForm').reset();
+       window.location.href='http://127.0.0.1:8000/progress';
+      })// Reset the form
+    
     }
   </script>
+
 </body>
 </html>
