@@ -52,10 +52,12 @@ async def websocket_logs(websocket: WebSocket):
     connected_clients.add(websocket)
 
     try:
-        while True:
+        count=0
+        while count<10:
             # Continuously send log messages to the client
             log_message =  get_next_log_message()
             await websocket.send_text(log_message)
+            count+=1
     except WebSocketDisconnect:
         connected_clients.remove(websocket)
 
